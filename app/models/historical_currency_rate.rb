@@ -1,0 +1,2 @@
+class HistoricalCurrencyRate < ApplicationRecord
+end

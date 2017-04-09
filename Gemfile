@@ -4,6 +4,7 @@ ruby '2.4.1'
 
 gem 'rails', '~> 5'
 gem 'pg'
+gem 'fixer'
 
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'rails-assets-tether'
