@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408203200) do
+ActiveRecord::Schema.define(version: 20170413182146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,12 +21,31 @@ ActiveRecord::Schema.define(version: 20170408203200) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "forecasts", force: :cascade do |t|
+    t.integer  "base_currency_id"
+    t.integer  "target_currency_id"
+    t.integer  "last_date"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["base_currency_id"], name: "index_forecasts_on_base_currency_id", using: :btree
+    t.index ["last_date"], name: "index_forecasts_on_last_date", using: :btree
+    t.index ["target_currency_id"], name: "index_forecasts_on_target_currency_id", using: :btree
+  end
+
   create_table "historical_currency_rates", force: :cascade do |t|
     t.integer "date"
     t.integer "currency_id"
     t.decimal "rate"
     t.index ["currency_id"], name: "index_historical_currency_rates_on_currency_id", using: :btree
     t.index ["date"], name: "index_historical_currency_rates_on_date", using: :btree
+  end
+
+  create_table "rate_forecasts", force: :cascade do |t|
+    t.integer "forecast_id"
+    t.integer "date"
+    t.decimal "rate"
+    t.index ["date"], name: "index_rate_forecasts_on_date", using: :btree
+    t.index ["forecast_id"], name: "index_rate_forecasts_on_forecast_id", using: :btree
   end
 
 end

@@ -1,0 +1,30 @@
+= form_for @forecast, html: { class: "form form-horizontal forecast" } do |f|
+  - if @forecast.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@forecast.errors.count, "error")
+        prohibited this forecast from being saved:
+      %ul
+        - @forecast.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :base_currency, class: 'control-label col-lg-2'
+    .col-lg-10
+      = f.select :base_currency_id, options_for_select(Currency.all.map { |cur| [cur.name, cur.id] }, selected_key = f.object.base_currency_id), class: 'form-control'
+    .col-lg-10
+  .form-group
+    = f.label :target_currency, class: 'control-label col-lg-2'
+    .col-lg-10
+      = f.select :target_currency_id, options_for_select(Currency.all.map { |cur| [cur.name, cur.id] }, selected_key = f.object.target_currency_id), class: 'form-control'
+    .col-lg-10
+  .form-group
+    = f.label :last_forecast_date, class: 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_field :last_date, class: 'form-control export_date', required: true
+  #chart-container{:style => "width: auto; height: 400px; margin: 0 auto"}
+  .form-group
+    .col-lg-offset-2.col-lg-10
+      = link_to t('.back', :default => t("helpers.links.back")), forecasts_path, :class => 'btn btn-default'
+      = f.submit nil,class: 'btn btn-primary'
+      - if @forecast.id
+        = link_to t('.destroy', :default => t("helpers.links.destroy")), forecast_path(@forecast), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

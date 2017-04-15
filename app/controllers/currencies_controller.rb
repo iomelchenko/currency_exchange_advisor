@@ -39,11 +39,12 @@ class CurrenciesController < ApplicationController
   end
 
   private
-    def set_currency
-      @currency = Currency.find(params[:id])
-    end
 
-    def currency_params
-      params.require(:currency).permit(:id, :name)
-    end
+  def set_currency
+    @currency = Currency.find(params[:id])
+  end
+
+  def currency_params
+    params.require(:currency).permit(:id, :name)
+  end
 end

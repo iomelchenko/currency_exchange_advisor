@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  root 'currencies#index'
+  root 'forecasts#index'
   resources :currencies
+  resources :forecasts do
+    collection do
+      get :fetch_forecast_rates
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
