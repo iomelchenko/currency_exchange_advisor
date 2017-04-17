@@ -1,5 +1,5 @@
 class ForecastsController < ApplicationController
-  before_action :set_forecast, only: [:show, :edit, :update, :destroy]
+  before_action :set_forecast, only: [:show, :edit, :update, :destroy, :fetch_forecast_rates]
 
   def index
     @forecasts = Forecast.all.order('id DESC').with_currency
@@ -13,14 +13,13 @@ class ForecastsController < ApplicationController
   end
 
   def create
+    @forecast = Forecast.new(
+      last_date:          Date.strptime(forecast_params[:last_date], '%m/%d/%Y').to_time.to_i,
+      base_currency_id:   forecast_params[:base_currency_id],
+      target_currency_id: forecast_params[:target_currency_id]
+      )
 
-  end
-
-  def create
-    @forecast = Forecast.new(forecast_params)
-
-    if @forecast.save
-      ForecastCalculator.new(@forecast).perform
+    if @forecast.save_forecast
       redirect_to forecast_path(@forecast), notice: 'Forecast was successfully created.'
     else
       render :new
@@ -29,22 +28,20 @@ class ForecastsController < ApplicationController
 
   def fetch_forecast_rates
     rates = []
-    @forecast = RateForecast.where(forecast_id: params[:id]).order(:date)
+    forecast_rates = RateForecast.where(forecast_id: @forecast.id).order(:date)
 
-    @forecast.limit(100).each do |rate|
+    forecast_rates.each do |rate|
       rates.push(rate.rate.to_f)
     end
 
-    @start_date = @forecast.first.date * 1000
-
-    render json: [{name:                'USD',
-                   point_start:         @start_date,
+    render json: [{name:                @forecast_decorated.chart_name,
+                   point_start:         forecast_rates.first.date * 1000,
                    point_interval_unit: 'day',
                    data:                rates}]
   end
 
   def destroy
-    @forecast.destroy
+    @forecast.remove_with_rates
     redirect_to forecasts_url, notice: 'Forecast was successfully destroyed.'
   end
 
@@ -56,5 +53,6 @@ class ForecastsController < ApplicationController
 
   def set_forecast
     @forecast = Forecast.find(params[:id])
+    @forecast_decorated = @forecast.decorate
   end
 end

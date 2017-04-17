@@ -5,13 +5,16 @@ class FixerClient
     @load_type = load_type
   end
 
-  def load_euro_currency_rates
+  def load_currency_rates
     data = Fixer::Feed.new(load_type)
-
-    data.each do |rate|
-      if (currency_id = currency_dictionary["#{rate[:iso_code]}"]).present?
-        HistoricalCurrencyRate.where(currency_id: currency_id, date: rate[:date].to_time.to_i).
-          first_or_create(rate: rate[:rate])
+    HistoricalCurrencyRate.delete_all
+    HistoricalCurrencyRate.bulk_insert do |worker|
+      data.each do |rate|
+        if (currency_id = currency_dictionary["#{rate[:iso_code]}"]).present?
+          worker.add(currency_id: currency_id,
+                     date:        rate[:date].to_time.to_i,
+                     rate:        rate[:rate])
+        end
       end
     end
   end

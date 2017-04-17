@@ -1,6 +1,6 @@
-var currencyRatesChart; // globally available
-$(document).ready(function() {
+var currencyRatesChart;
 
+$(document).ready(function() {
   currencyRatesChart = new Highcharts.Chart({
     chart: {
       renderTo: 'chart-container',
@@ -9,7 +9,7 @@ $(document).ready(function() {
       plotBorderWidth: null,
       plotShadow: false,
       events: {
-        load: requestRates()
+        load: requestRates(forecastId)
       }
     },
     title: {
@@ -49,16 +49,15 @@ $(document).ready(function() {
     },
     series: []
   });
-
   currencyRatesChart.showLoading();
+  $('#forecast_last_date').datepicker();
 });
 
-function requestRates() {
-  console.log('!!!!!!!!')
+function requestRates(forecastId) {
   $.ajax({
-    url: "/forecasts",
-    type: "POST",
-    data: {id: 1},
+    url: "/forecasts/fetch_forecast_rates",
+    type: "GET",
+    data: {id: forecastId},
     success: function(data_arr) {
       data_arr.forEach(function(ret_data) {
         console.log(ret_data)

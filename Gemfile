@@ -6,14 +6,19 @@ gem 'rails', '~> 5'
 gem 'pg'
 gem 'fixer'
 
-gem 'bootstrap', '~> 4.0.0.alpha6'
-gem 'rails-assets-tether'
 gem 'haml-rails'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
+
+gem 'gsl'
+gem 'statsample'
+gem 'statsample-timeseries'
+
+gem 'bulk_insert'
+gem 'draper', '3.0.0.pre1'
 
 group :development, :test do
   gem 'pry'

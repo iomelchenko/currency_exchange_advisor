@@ -1,1 +1,5 @@
+- content_for :head_tag do
+  = javascript_tag "var forecastId = #{@forecast.id};"
+  = javascript_include_tag 'charts.js'
+
 = render partial: 'forecast'

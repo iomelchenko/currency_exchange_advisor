@@ -9,19 +9,16 @@
           %li= message
   .form-group
     = f.label :base_currency, class: 'control-label col-lg-2'
-    .col-lg-10
-      = f.select :base_currency_id, options_for_select(Currency.all.map { |cur| [cur.name, cur.id] }, selected_key = f.object.base_currency_id), class: 'form-control'
-    .col-lg-10
+    = f.select :base_currency_id, options_for_select(currency_selection, selected_key = f.object.base_currency_id), class: 'form-control'
   .form-group
     = f.label :target_currency, class: 'control-label col-lg-2'
-    .col-lg-10
-      = f.select :target_currency_id, options_for_select(Currency.all.map { |cur| [cur.name, cur.id] }, selected_key = f.object.target_currency_id), class: 'form-control'
-    .col-lg-10
+    = f.select :target_currency_id, options_for_select(currency_selection, selected_key = f.object.target_currency_id), class: 'form-control'
   .form-group
     = f.label :last_forecast_date, class: 'control-label col-lg-2'
-    .col-lg-10
-      = f.text_field :last_date, class: 'form-control export_date', required: true
-  #chart-container{:style => "width: auto; height: 400px; margin: 0 auto"}
+    = f.text_field :last_date, class: 'form-control', size: "16", required: true
+
+  = render partial: 'chart'
+
   .form-group
     .col-lg-offset-2.col-lg-10
       = link_to t('.back', :default => t("helpers.links.back")), forecasts_path, :class => 'btn btn-default'
