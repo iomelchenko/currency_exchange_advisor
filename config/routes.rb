@@ -1,3 +1,5 @@
+require "que/web"
+
 Rails.application.routes.draw do
   root 'forecasts#index'
   resources :currencies
@@ -6,6 +8,8 @@ Rails.application.routes.draw do
       get :fetch_forecast_rates
     end
   end
+
+  mount Que::Web => "/que"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

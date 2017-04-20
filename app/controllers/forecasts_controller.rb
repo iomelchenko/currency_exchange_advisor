@@ -13,6 +13,8 @@ class ForecastsController < ApplicationController
   end
 
   def create
+    FixerClient.new.load_currency_rates_if_needed
+
     @forecast = Forecast.new(
       last_date:          Date.strptime(forecast_params[:last_date], '%m/%d/%Y').to_time.to_i,
       base_currency_id:   forecast_params[:base_currency_id],
