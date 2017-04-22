@@ -19,7 +19,8 @@ class ForecastCalculator
   end
 
   def create_forecast(ts)
-    Statsample::TimeSeries::ARIMA.ks(ts, 1, 0, 0) # (1,0,0) - autoregression model
+    timeseries = ts.to_ts
+    Statsample::TimeSeries::ARIMA.ks(timeseries, 1, 0, 0) # (1,0,0) - autoregression model
   end
 
   def historical_cross_course_rates

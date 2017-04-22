@@ -9,13 +9,13 @@
           %li= message
   .form-group
     = f.label :base_currency, class: 'control-label col-lg-2'
-    = f.select :base_currency_id, options_for_select(currency_selection, selected_key = f.object.base_currency_id), class: 'form-control'
+    = f.select :base_currency_id, options_for_select(currency_selection, selected_key = f.object.base_currency_id), class: 'form-control', required: true
   .form-group
     = f.label :target_currency, class: 'control-label col-lg-2'
-    = f.select :target_currency_id, options_for_select(currency_selection, selected_key = f.object.target_currency_id), class: 'form-control'
+    = f.select :target_currency_id, options_for_select(currency_selection, selected_key = f.object.target_currency_id), class: 'form-control', required: true
   .form-group
     = f.label :amount, class: 'control-label col-lg-2'
-    = f.text_field :amount, class: 'form-control'
+    = f.text_field :amount, class: 'form-control', required: true
   .form-group
     = f.label :last_forecast_date, class: 'control-label col-lg-2'
     = f.text_field :last_date, class: 'form-control', size: "16", required: true

@@ -16,7 +16,7 @@
   %tbody
     - @forecasts.each do |forecast|
       %tr
-        %td= link_to forecast.id, forecast_path(forecast)
+        %td= link_to forecast.id, edit_forecast_path(forecast)
         %td= forecast.base_curr_name
         %td= forecast.target_curr_name
         %td= forecast.base_amount

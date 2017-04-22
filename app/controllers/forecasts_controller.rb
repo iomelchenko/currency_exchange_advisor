@@ -8,7 +8,6 @@ class ForecastsController < ApplicationController
   end
 
   def edit
-    @forecast = @forecast
   end
 
   def new
