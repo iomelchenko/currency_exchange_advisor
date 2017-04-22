@@ -1,12 +1,13 @@
 class ForecastsController < ApplicationController
-  before_action :set_forecast, only: [:show, :edit, :update, :destroy, :fetch_forecast_rates]
+  before_action :set_forecast, only: [:edit, :update, :destroy, :fetch_forecast_rates]
+  before_action :update_rates, only: [:update, :create]
 
   def index
     @forecasts = Forecast.all.order('id DESC').
       with_currency.decorate
   end
 
-  def show
+  def edit
     @forecast = @forecast
   end
 
@@ -15,19 +16,22 @@ class ForecastsController < ApplicationController
   end
 
   def create
-    FixerClient.new.load_currency_rates_if_needed
-
-    @forecast = Forecast.new(
-      last_date:          Date.strptime(forecast_params[:last_date], '%m/%d/%Y').to_time.to_i,
-      amount:             forecast_params[:amount],
-      base_currency_id:   forecast_params[:base_currency_id],
-      target_currency_id: forecast_params[:target_currency_id],
-      )
+    @forecast = Forecast.new(converted_params)
 
     if @forecast.save_forecast
-      redirect_to forecast_path(@forecast), notice: 'Forecast was successfully created.'
+      redirect_to edit_forecast_path(@forecast), notice: 'Forecast was successfully created.'
     else
       render :new
+    end
+  end
+
+  def update
+    @forecast.assign_attributes(converted_params)
+
+    if @forecast.save_forecast
+      redirect_to edit_forecast_path(@forecast), notice: 'Forecast was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -49,5 +53,14 @@ class ForecastsController < ApplicationController
 
   def set_forecast
     @forecast = Forecast.find(params[:id]).decorate
+  end
+
+  def update_rates
+    FixerClient.new.load_currency_rates_if_needed
+  end
+
+  def converted_params
+    converted_params = forecast_params.to_h
+    converted_params.merge!(last_date: Date.strptime(forecast_params[:last_date], '%m/%d/%Y').to_time.to_i)
   end
 end

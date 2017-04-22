@@ -6,6 +6,7 @@ class Forecast < ApplicationRecord
   def save_forecast
     Forecast.transaction do
       self.save!
+      RateForecast.where(forecast: self).delete_all
       forecast_rates = ForecastCalculator.new(self).perform
       ForecastLoader.new(self, forecast_rates).perform
     end
