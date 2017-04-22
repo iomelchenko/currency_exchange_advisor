@@ -9,6 +9,7 @@
       %th= model_class.human_attribute_name(:id)
       %th= model_class.human_attribute_name(:base_currency)
       %th= model_class.human_attribute_name(:target_currency)
+      %th= model_class.human_attribute_name(:amount)
       %th= model_class.human_attribute_name(:start_date)
       %th= model_class.human_attribute_name(:end_date)
       %th=t '.actions', :default => t("helpers.actions")
@@ -18,6 +19,7 @@
         %td= link_to forecast.id, forecast_path(forecast)
         %td= forecast.base_curr_name
         %td= forecast.target_curr_name
+        %td= forecast.base_amount
         %td=l forecast.created_at.to_date
         %td=l Time.at(forecast.last_date).to_date
         %td

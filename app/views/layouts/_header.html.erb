@@ -2,17 +2,17 @@
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <%= link_to "Forecasts", root_path, class: "navbar-brand" %>
+
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav nav-tabs">
-      <li class="nav-item active">
-        <a class="nav-link" href="<%= forecast_path(1) %>">Forecast show <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" id="chart-data" href="<%= root_path %>"> Forecasts list <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="chart-data" href="<%= new_forecast_path %>">Forecast new <span class="sr-only">(current)</span></a>
+        <a class="nav-link" id="chart-data" href="<%= new_forecast_path %>"> Forecast new <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<%= currencies_path %>">Currencies <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<%= currencies_path %>"> Currencies <span class="sr-only">(current)</span></a>
       </li>
     </ul>
   </div>

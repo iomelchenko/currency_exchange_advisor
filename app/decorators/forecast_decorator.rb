@@ -1,11 +1,11 @@
 class ForecastDecorator < Draper::Decorator
-  decorates_finders
+  delegate_all
 
   def chart_name
-    "#{Currency.find(object.base_currency_id).name} - #{Currency.find(object.target_currency_id).name}"
+    "#{Currency.find(base_currency_id).name} - #{Currency.find(target_currency_id).name}"
   end
 
-  def currency_selection
-    Currency.all.map { |cur| [cur.name, cur.id] }
+  def base_amount
+    "#{amount} #{base_curr_name}"
   end
 end
