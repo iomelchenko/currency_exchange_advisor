@@ -27,7 +27,7 @@ $(document).ready(function() {
     },
     yAxis: {
       title: {
-        text: 'Currency rate'
+        text: 'Target Currency'
       }
     },
     tooltip: {

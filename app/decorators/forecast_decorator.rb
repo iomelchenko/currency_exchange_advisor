@@ -2,7 +2,7 @@ class ForecastDecorator < Draper::Decorator
   delegate_all
 
   def chart_name
-    "#{Currency.find(base_currency_id).name} - #{Currency.find(target_currency_id).name}"
+    "#{Currency.find(target_currency_id).name}"
   end
 
   def base_amount
