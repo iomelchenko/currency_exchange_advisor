@@ -15,7 +15,7 @@ class ForecastCalculator
   end
 
   def historical_period
-    forecast_period > 365 ? forecast_period : 365
+    forecast_period
   end
 
   def create_forecast(ts)

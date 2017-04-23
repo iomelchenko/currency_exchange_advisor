@@ -44,7 +44,9 @@ class FixerClient
         if (currency_id = currency_dictionary["#{rate[:iso_code]}"]).present?
           worker.add(currency_id: currency_id,
                      date:        rate[:date].to_time.to_i,
-                     rate:        rate[:rate])
+                     rate:        rate[:rate],
+                     week_number: rate[:date].strftime('%W').to_i,
+                     year:        rate[:date].strftime('%Y').to_i)
         end
       end
     end

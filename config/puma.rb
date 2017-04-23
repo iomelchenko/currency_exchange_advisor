@@ -10,6 +10,5 @@ environment ENV['RACK_ENV'] || 'development'
 
 on_worker_boot do
   ActiveRecord::Base.establish_connection
-  #Que.mode = :async
-  Que.mode = :off
+  Que.mode = :async
 end

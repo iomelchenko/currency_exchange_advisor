@@ -1,4 +1,4 @@
-class ForecastDecorator < Draper::Decorator
+class ForecastDecorator < ApplicationDecorator
   delegate_all
 
   def chart_name
@@ -20,5 +20,9 @@ class ForecastDecorator < Draper::Decorator
 
   def weeks_selection
     1.upto(250).map { |week| ["#{week} weeks", week] }
+  end
+
+  def year_with_week
+    Time.at(object.date).strftime('%Y')
   end
 end

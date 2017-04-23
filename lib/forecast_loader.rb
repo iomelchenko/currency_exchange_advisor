@@ -13,7 +13,9 @@ class ForecastLoader
       forecast_rates.each do |rate|
         worker.add(forecast_id: forecast.id,
                    date:        date,
-                   rate:        rate)
+                   rate:        rate,
+                   week_number: Time.at(date).strftime('%W').to_i,
+                   year:        Time.at(date).strftime('%Y').to_i)
         date += 86400
       end
     end

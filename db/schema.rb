@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423132024) do
+ActiveRecord::Schema.define(version: 20170423134910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20170423132024) do
     t.integer "date"
     t.integer "currency_id"
     t.decimal "rate"
+    t.integer "week_number"
+    t.integer "year"
     t.index ["currency_id"], name: "index_historical_currency_rates_on_currency_id", using: :btree
     t.index ["date"], name: "index_historical_currency_rates_on_date", using: :btree
   end
@@ -56,6 +58,8 @@ ActiveRecord::Schema.define(version: 20170423132024) do
     t.integer "forecast_id"
     t.integer "date"
     t.decimal "rate"
+    t.integer "week_number"
+    t.integer "year"
     t.index ["date"], name: "index_rate_forecasts_on_date", using: :btree
     t.index ["forecast_id"], name: "index_rate_forecasts_on_forecast_id", using: :btree
   end

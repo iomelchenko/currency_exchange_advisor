@@ -8,7 +8,7 @@ class ForecastsController < ApplicationController
   end
 
   def edit
-    @aggregarted_forecast = @forecast.aggregate
+    @aggregarted_forecast = @forecast.aggregate.decorate
   end
 
   def new

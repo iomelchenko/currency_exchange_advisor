@@ -10,7 +10,7 @@
     %tbody
       - @aggregarted_forecast.each do |forecast|
         %tr
-          %td= forecast.date
+          %td= forecast.year_with_week
           %td= forecast.rate
           %td= @forecast.amount * forecast.rate
           %td= 100
