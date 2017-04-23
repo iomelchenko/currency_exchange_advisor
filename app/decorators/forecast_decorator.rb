@@ -6,7 +6,7 @@ class ForecastDecorator < ApplicationDecorator
   end
 
   def base_amount
-    "#{amount} #{base_curr_name}"
+    "#{amount.round(2)} #{base_curr_name}"
   end
 
   def last_date

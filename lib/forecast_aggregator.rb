@@ -13,6 +13,6 @@ class ForecastAggregator
     RateForecast.where(forecast: forecast).
       group("rate_forecasts.year, rate_forecasts.week_number").
       select("rate_forecasts.year, rate_forecasts.week_number, avg(rate) AS avg_rate, RANK() OVER(ORDER BY avg(rate) DESC) AS rank").
-      order("week_number")
+      order("year, week_number")
   end
 end

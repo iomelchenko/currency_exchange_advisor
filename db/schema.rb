@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423134910) do
+ActiveRecord::Schema.define(version: 20170423173840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170423134910) do
     t.integer  "term_in_weeks"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.integer  "amount"
+    t.decimal  "amount"
     t.index ["base_currency_id"], name: "index_forecasts_on_base_currency_id", using: :btree
     t.index ["target_currency_id"], name: "index_forecasts_on_target_currency_id", using: :btree
     t.index ["term_in_weeks"], name: "index_forecasts_on_term_in_weeks", using: :btree

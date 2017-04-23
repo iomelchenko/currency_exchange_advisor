@@ -4,7 +4,7 @@ class ForecastLoader
   def initialize(forecast, forecast_rates)
     @forecast       = forecast
     @forecast_rates = forecast_rates
-    @start_date     = (Time.now.to_date + 1.day).to_time.to_i
+    @start_date     = (Time.now.to_date.beginning_of_day + 1.day).to_time.to_i
   end
 
   def perform

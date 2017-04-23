@@ -6,7 +6,7 @@ class RateForecast < ApplicationRecord
     forecast_rates = where(forecast_id: forecast.id).order(:date)
 
     forecast_rates.each do |rate|
-      rates.push (rate.rate.to_f * forecast.amount).round(3)
+      rates.push (rate.rate.to_f * forecast.amount).round(2)
     end
 
     [{ name:                forecast.target_currency_name,
