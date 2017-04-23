@@ -3,16 +3,16 @@
     %thead
       %tr
         %th= "Eear, week number"
-        %th= "Used Rate"
-        %th= "Amount"
-        %th= "Profit / loss"
+        %th= "Used rate (average per week)"
+        %th= "Amount (#{@forecast.target_currency_name})"
+        %th= "Profit / loss (#{@forecast.target_currency_name})"
         %th= "Rank"
     %tbody
       - @aggregarted_forecast.each do |forecast|
         %tr
           %td= forecast.year_with_week
-          %td= forecast.rate
-          %td= @forecast.amount * forecast.rate
-          %td= 100
-          %td= 1
+          %td= forecast.avg_rate.round(3)
+          %td= forecast.target_amount(@forecast.amount)
+          %td= forecast.profit_loss(@aggregarted_forecast.first.avg_rate, @forecast.amount)
+          %td= forecast.max_ranks
 

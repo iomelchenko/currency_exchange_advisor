@@ -21,8 +21,4 @@ class Forecast < ApplicationRecord
       self.delete
     end
   end
-
-  def aggregate
-    self.rate_forecasts
-  end
 end

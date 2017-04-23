@@ -9,7 +9,7 @@ class RateForecast < ApplicationRecord
       rates.push (rate.rate.to_f * forecast.amount).round(3)
     end
 
-    [{ name:                forecast.chart_name,
+    [{ name:                forecast.target_currency_name,
        point_start:         forecast_rates.first.date * 1000,
        data:                rates,
        point_interval_unit: 'day'

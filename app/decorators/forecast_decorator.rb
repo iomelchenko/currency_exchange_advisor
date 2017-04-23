@@ -1,7 +1,7 @@
 class ForecastDecorator < ApplicationDecorator
   delegate_all
 
-  def chart_name
+  def target_currency_name
     "#{Currency.find(target_currency_id).name}"
   end
 
