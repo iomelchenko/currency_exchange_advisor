@@ -11,7 +11,7 @@ class ForecastCalculator
   end
 
   def forecast_period
-    @forecast_period ||= (Time.at(@forecast.last_date).to_date - Time.now.to_date).to_i
+    @forecast_period ||= @forecast.term_in_weeks * 7
   end
 
   def historical_period

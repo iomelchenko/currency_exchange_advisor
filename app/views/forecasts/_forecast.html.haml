@@ -12,19 +12,18 @@
       .col
         .form-group
           = f.label :base_currency, class: 'control-label col-xs-2'
-          = f.select :base_currency_id, options_for_select(currency_selection, selected_key = f.object.base_currency_id), {prompt: 'Select Base currency'}, class: 'form-control col-xs-2', required: true
+          = f.select :base_currency_id, options_for_select(@forecast.currency_selection, selected_key = f.object.base_currency_id), {prompt: 'Select Base currency'}, class: 'form-control col-xs-2', required: true
         .form-group
           = f.label :target_currency, class: 'control-label col-xs-2'
-          = f.select :target_currency_id, options_for_select(currency_selection, selected_key = f.object.target_currency_id), {prompt: 'Select Target currency'}, class: 'form-control col-xs-2', required: true
+          = f.select :target_currency_id, options_for_select(@forecast.currency_selection, selected_key = f.object.target_currency_id), {prompt: 'Select Target currency'}, class: 'form-control col-xs-2', required: true
       .col
         .form-group
           = f.label :amount, class: 'control-label col-xs-2'
           = f.text_field :amount, class: 'form-control col-xs-2', required: true
         .form-group
           = f.label :last_forecast_date, class: 'control-label col-xs-2'
-          = f.text_field :last_date, value: last_date_to_date(f.object.last_date), class: 'form-control col-xs-2', size: "16", required: true
+          = f.select :term_in_weeks, options_for_select(@forecast.weeks_selection, selected_key = f.object.term_in_weeks), {prompt: 'Select term in weeks'}, class: 'form-control col-xs-2', required: true
 
-  = render partial: 'chart'
 
   .form-group
     .col-lg-offset-2.col-lg-10
@@ -32,3 +31,6 @@
       = f.submit nil,class: 'btn btn-primary'
       - if @forecast.id
         = link_to t('.destroy', :default => t("helpers.links.destroy")), forecast_path(@forecast), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+
+  = render partial: 'chart'
+  = render partial: 'forecast_table'

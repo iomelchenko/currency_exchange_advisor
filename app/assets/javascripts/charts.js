@@ -50,7 +50,6 @@ $(document).ready(function() {
     series: []
   });
   currencyRatesChart.showLoading();
-  $('#forecast_last_date').datepicker();
 });
 
 function requestRates(forecastId) {

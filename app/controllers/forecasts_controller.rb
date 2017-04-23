@@ -8,14 +8,15 @@ class ForecastsController < ApplicationController
   end
 
   def edit
+    @aggregarted_forecast = @forecast.aggregate
   end
 
   def new
-    @forecast = Forecast.new
+    @forecast = Forecast.new.decorate
   end
 
   def create
-    @forecast = Forecast.new(converted_params)
+    @forecast = Forecast.new(forecast_params)
 
     if @forecast.save_forecast
       redirect_to edit_forecast_path(@forecast), notice: 'Forecast was successfully created.'
@@ -25,7 +26,7 @@ class ForecastsController < ApplicationController
   end
 
   def update
-    @forecast.assign_attributes(converted_params)
+    @forecast.assign_attributes(forecast_params)
 
     if @forecast.save_forecast
       redirect_to edit_forecast_path(@forecast), notice: 'Forecast was successfully updated.'
@@ -47,7 +48,7 @@ class ForecastsController < ApplicationController
   private
 
   def forecast_params
-    params.require(:forecast).permit(:base_currency_id, :target_currency_id, :last_date, :amount)
+    params.require(:forecast).permit(:base_currency_id, :target_currency_id, :term_in_weeks, :amount)
   end
 
   def set_forecast
@@ -56,10 +57,5 @@ class ForecastsController < ApplicationController
 
   def update_rates
     FixerClient.new.load_currency_rates_if_needed
-  end
-
-  def converted_params
-    converted_params = forecast_params.to_h
-    converted_params.merge!(last_date: Date.strptime(forecast_params[:last_date], '%m/%d/%Y').to_time.to_i)
   end
 end

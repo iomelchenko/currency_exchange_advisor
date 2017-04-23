@@ -1,0 +1,18 @@
+- if @forecast.id
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= "Eear, week number"
+        %th= "Used Rate"
+        %th= "Amount"
+        %th= "Profit / loss"
+        %th= "Rank"
+    %tbody
+      - @aggregarted_forecast.each do |forecast|
+        %tr
+          %td= forecast.date
+          %td= forecast.rate
+          %td= @forecast.amount * forecast.rate
+          %td= 100
+          %td= 1
+

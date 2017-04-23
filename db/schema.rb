@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422101217) do
+ActiveRecord::Schema.define(version: 20170423132024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,13 +24,13 @@ ActiveRecord::Schema.define(version: 20170422101217) do
   create_table "forecasts", force: :cascade do |t|
     t.integer  "base_currency_id"
     t.integer  "target_currency_id"
-    t.integer  "last_date"
+    t.integer  "term_in_weeks"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "amount"
     t.index ["base_currency_id"], name: "index_forecasts_on_base_currency_id", using: :btree
-    t.index ["last_date"], name: "index_forecasts_on_last_date", using: :btree
     t.index ["target_currency_id"], name: "index_forecasts_on_target_currency_id", using: :btree
+    t.index ["term_in_weeks"], name: "index_forecasts_on_term_in_weeks", using: :btree
   end
 
   create_table "historical_currency_rates", force: :cascade do |t|
