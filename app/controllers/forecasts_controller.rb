@@ -8,7 +8,7 @@ class ForecastsController < ApplicationController
   end
 
   def edit
-    @aggregarted_forecast = ForecastAggregator.new(@forecast).perform.decorate
+    aggregate_forecast
   end
 
   def new
@@ -16,7 +16,7 @@ class ForecastsController < ApplicationController
   end
 
   def create
-    @forecast = Forecast.new(forecast_params)
+    @forecast = Forecast.new(forecast_params).decorate
 
     if @forecast.save_forecast
       redirect_to edit_forecast_path(@forecast), notice: 'Forecast was successfully created.'
@@ -31,6 +31,7 @@ class ForecastsController < ApplicationController
     if @forecast.save_forecast
       redirect_to edit_forecast_path(@forecast), notice: 'Forecast was successfully updated.'
     else
+      aggregate_forecast
       render :edit
     end
   end
@@ -57,5 +58,9 @@ class ForecastsController < ApplicationController
 
   def update_rates
     FixerClient.new.load_currency_rates_if_needed
+  end
+
+  def aggregate_forecast
+    @aggregarted_forecast = ForecastAggregator.new(@forecast).perform.decorate
   end
 end
