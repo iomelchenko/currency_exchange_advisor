@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %title CurrencyExchangeAdvisor
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = csrf_meta_tags
+    = yield :head_tag
+  %body
+    = render 'layouts/header'
+    .container
+      - flash.each do |name, msg|
+        = content_tag(:div, msg, class: "alert alert-info")
+      = yield

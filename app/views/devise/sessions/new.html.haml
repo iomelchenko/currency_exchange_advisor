@@ -1,0 +1,17 @@
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  %h2.form-signin-heading Please sign in
+  .container
+    .row
+      .col-xs-2
+        .form-group
+          = f.label :login, class: 'control-label col-xs-2'
+          = f.text_field :login, autofocus: true, class: 'form-control col-xs-2', placeholder: 'Enter email or username'
+        .form-group
+          = f.label :password, class: 'control-label col-xs-2'
+          = f.password_field :password, autocomplete: "off", class: 'form-control col-xs-2', placeholder: 'Password'
+          - if devise_mapping.rememberable?
+            %label
+              = f.check_box :remember_me, label: false
+              Remember me
+          = f.button "Sign in", class: 'btn btn-lg btn-primary btn-block'
+        = render "devise/shared/links"

@@ -59,7 +59,6 @@ function requestRates(forecastId) {
     data: {id: forecastId},
     success: function(data_arr) {
       data_arr.forEach(function(ret_data) {
-        console.log(ret_data)
         currencyRatesChart.addSeries({
           name: ret_data.name,
           type: 'line',

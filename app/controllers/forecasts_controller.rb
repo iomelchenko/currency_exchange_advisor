@@ -1,9 +1,11 @@
 class ForecastsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_forecast, only: [:edit, :update, :destroy, :fetch_forecast_rates]
   before_action :update_rates, only: [:update, :create]
 
   def index
-    @forecasts = Forecast.all.order('id DESC').
+    @forecasts = Forecast.for_current_user(current_user).
+      order('id DESC').
       with_currency.decorate
   end
 
@@ -49,11 +51,12 @@ class ForecastsController < ApplicationController
   private
 
   def forecast_params
-    params.require(:forecast).permit(:base_currency_id, :target_currency_id, :term_in_weeks, :amount)
+    params.require(:forecast).permit(:base_currency_id, :target_currency_id, :term_in_weeks, :amount, :user_id).to_h.merge(user_id: current_user.id)
   end
 
   def set_forecast
-    @forecast = Forecast.find(params[:id]).decorate
+    @forecast = Forecast.for_current_user(current_user).
+      find(params[:id]).decorate
   end
 
   def update_rates

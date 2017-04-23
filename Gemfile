@@ -6,6 +6,7 @@ gem 'rails', '~> 5'
 gem 'pg'
 gem 'puma'
 gem 'fixer'
+gem 'devise'
 
 gem 'haml-rails'
 gem 'sass-rails'
