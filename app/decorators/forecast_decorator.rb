@@ -2,7 +2,7 @@ class ForecastDecorator < ApplicationDecorator
   delegate_all
 
   def target_currency_name
-    "#{Currency.find(target_currency_id).name}"
+    Currency.find(target_currency_id).name
   end
 
   def base_amount
@@ -18,8 +18,9 @@ class ForecastDecorator < ApplicationDecorator
   end
 
   def currency_selection
-    @_currency_selection ||= Currency.all.
-      order(:name).map { |cur| [cur.name, cur.id] }
+    @_currency_selection ||= Currency.all
+                                     .order(:name)
+                                     .map { |cur| [cur.name, cur.id] }
   end
 
   def weeks_selection

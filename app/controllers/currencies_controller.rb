@@ -1,20 +1,18 @@
 class CurrenciesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_currency, only: [:show, :edit, :update, :destroy]
+  before_action :set_currency, only: %i[show edit update destroy]
 
   def index
     @currencies = Currency.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @currency = Currency.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @currency = Currency.new(currency_params)

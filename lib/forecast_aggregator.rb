@@ -10,9 +10,7 @@ class ForecastAggregator
   end
 
   def aggregate_data
-    RateForecast.where(forecast: forecast).
-      group("rate_forecasts.year, rate_forecasts.week_number").
-      select("rate_forecasts.year, rate_forecasts.week_number, MAX(rate) AS avg_rate, RANK() OVER(ORDER BY MAX(rate) DESC) AS rank").
-      order("year, week_number")
+    RateForecast.where(forecast: forecast).group_by_year_week
+                .select_with_rank.order_by_year_week
   end
 end

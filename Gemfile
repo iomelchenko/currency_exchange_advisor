@@ -30,6 +30,7 @@ gem 'foreman'
 
 group :development, :test do
   gem 'pry'
+  gem 'rubocop', require: false
 end
 
 group :development do

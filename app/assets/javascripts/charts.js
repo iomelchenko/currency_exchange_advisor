@@ -54,7 +54,7 @@ $(document).ready(function() {
 
 function requestRates(forecastId) {
   $.ajax({
-    url: "/forecasts/fetch_forecast_rates",
+    url: "/forecasts/fetch_chart_data",
     type: "GET",
     data: {id: forecastId},
     success: function(data_arr) {

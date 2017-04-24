@@ -3,7 +3,7 @@ class Currency < ApplicationRecord
 
   def self.convert_to_hash
     curr_array = {}
-    all.each { |currency| curr_array.merge!({"#{currency.name}" => currency.id}) }
+    all.each { |currency| curr_array.merge!(currency.name.to_s => currency.id) }
     curr_array
   end
 end

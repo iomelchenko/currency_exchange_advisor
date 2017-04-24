@@ -11,14 +11,18 @@ class ForecastLoader
     date = start_date
     RateForecast.bulk_insert do |worker|
       forecast_rates.each do |rate|
-        worker.add(forecast_id: forecast.id,
-                   date:        date,
-                   rate:        rate,
-                   week_number: Time.at(date).strftime('%W').to_i,
-                   year:        Time.at(date).strftime('%Y').to_i)
-        date += 86400
+        build_worker(worker, date, rate)
+        date += 86_400
       end
     end
     true
+  end
+
+  def build_worker(worker, date, rate)
+    worker.add(forecast_id: forecast.id,
+               date:        date,
+               rate:        rate,
+               week_number: Time.at(date).to_date.cweek,
+               year:        Time.at(date).to_date.cwyear)
   end
 end

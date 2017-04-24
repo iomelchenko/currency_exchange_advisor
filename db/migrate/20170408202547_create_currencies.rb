@@ -6,7 +6,8 @@ class CreateCurrencies < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    ActiveRecord::Base.connection.execute("ALTER TABLE currencies ADD PRIMARY KEY (id)")
+    ActiveRecord::Base.connection
+                      .execute('ALTER TABLE currencies ADD PRIMARY KEY (id)')
   end
 
   def down

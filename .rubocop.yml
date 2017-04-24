@@ -1,0 +1,15 @@
+Documentation:
+  Enabled: false
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+    - lib/**/*.rake
+  Exclude:
+    - db/schema.rb
+    - db/migrate/20170423190447_devise_create_users.rb
+    - config/environments/production.rb
+    - config/environments/development.rb
+    - config/environments/test.rb
+    - config/initializers/devise.rb
+    - Gemfile

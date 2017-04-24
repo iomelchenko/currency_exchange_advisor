@@ -1,7 +1,7 @@
 class FixerClient
   attr_accessor :load_type
 
-  def initialize(load_type = :current, base_currency = "EUR")
+  def initialize(load_type = :current, base_currency = 'EUR')
     @load_type = load_type
     @base_currency = base_currency
   end
@@ -41,15 +41,22 @@ class FixerClient
   def insert_rates(data)
     HistoricalCurrencyRate.bulk_insert do |worker|
       data.each do |rate|
-        if (currency_id = currency_dictionary["#{rate[:iso_code]}"]).present?
-          worker.add(currency_id: currency_id,
-                     date:        rate[:date].to_time.to_i,
-                     rate:        rate[:rate],
-                     week_number: rate[:date].strftime('%W').to_i,
-                     year:        rate[:date].strftime('%Y').to_i)
-        end
+        next unless (currency_id = matched_currency_id(rate)).present?
+        build_worker(worker, rate, currency_id)
       end
     end
+  end
+
+  def build_worker(worker, rate, currency_id)
+    worker.add(currency_id: currency_id,
+               date:        rate[:date].to_time.to_i,
+               rate:        rate[:rate],
+               week_number: rate[:date].cweek,
+               year:        rate[:date].cwyear)
+  end
+
+  def matched_currency_id(rate)
+    currency_dictionary[rate[:iso_code].to_s]
   end
 
   def currency_dictionary
