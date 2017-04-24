@@ -7,8 +7,8 @@
     = csrf_meta_tags
     = yield :head_tag
   %body
-    = render 'layouts/header'
     .container
+      = render 'layouts/header'
       - flash.each do |name, msg|
         = content_tag(:div, msg, class: "alert alert-info")
       = yield

@@ -5,8 +5,8 @@ class ForecastsController < ApplicationController
 
   def index
     @forecasts = Forecast.for_current_user(current_user).
-      order('id DESC').
-      with_currency.decorate
+      order('id DESC').with_currency.paginate(page: params[:page], per_page: 10).
+      decorate
   end
 
   def edit

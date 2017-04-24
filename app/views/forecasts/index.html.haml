@@ -25,3 +25,5 @@
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_forecast_path(forecast), :class => 'btn btn-default btn-xs'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), forecast_path(forecast), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+
+= will_paginate @forecasts

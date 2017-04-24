@@ -14,6 +14,7 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'will_paginate'
 
 gem 'gsl'
 gem 'statsample'
