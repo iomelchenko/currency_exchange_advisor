@@ -5,7 +5,7 @@ class Forecast < ApplicationRecord
   validates_presence_of :base_currency_id, :target_currency_id, :amount, :term_in_weeks
   validates_numericality_of :amount
 
-  scope :with_currency, ->(){ joins('INNER JOIN currencies AS base_curr ON base_curr.id = forecasts.base_currency_id').joins('INNER JOIN currencies AS target_curr ON target_curr.id = forecasts.target_currency_id').select("forecasts.id, base_curr.name AS base_curr_name, target_curr.name AS target_curr_name, forecasts.amount, forecasts.created_at, forecasts.term_in_weeks") }
+  scope :with_currency, ->(){ joins('INNER JOIN currencies AS base_curr ON base_curr.id = forecasts.base_currency_id').joins('INNER JOIN currencies AS target_curr ON target_curr.id = forecasts.target_currency_id').select("forecasts.id, base_curr.name AS base_curr_name, target_curr.name AS target_curr_name, forecasts.amount, forecasts.updated_at, forecasts.term_in_weeks") }
 
   scope :for_current_user, ->(user){ where(user: user) }
 

@@ -20,7 +20,7 @@
         %td= forecast.base_curr_name
         %td= forecast.target_curr_name
         %td= forecast.base_amount
-        %td= forecast.created_at.to_date
+        %td= forecast.first_date
         %td= forecast.last_date
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_forecast_path(forecast), :class => 'btn btn-default btn-xs'

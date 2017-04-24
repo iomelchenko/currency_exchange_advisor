@@ -10,7 +10,11 @@ class ForecastDecorator < ApplicationDecorator
   end
 
   def last_date
-    (created_at + (term_in_weeks * 7).days).to_date
+    (updated_at + (term_in_weeks * 7).days).to_date
+  end
+
+  def first_date
+    updated_at.to_date + 1.day
   end
 
   def currency_selection
