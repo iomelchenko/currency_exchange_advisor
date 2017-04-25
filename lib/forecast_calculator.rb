@@ -29,7 +29,8 @@ class ForecastCalculator
 
   def historical_cross_course_rates
     rate = []
-    0.upto(hist_base_currency_rates.size - 1).each do |idx|
+
+    0.upto(rates_count - 1).each do |idx|
       rate << hist_target_currency_rates[idx] / hist_base_currency_rates[idx]
     end
 
@@ -44,5 +45,9 @@ class ForecastCalculator
   def hist_target_currency_rates
     @t_rates ||= HistoricalCurrencyRate
                  .hist_currency_rates(@forecast.target_currency_id, hist_period)
+  end
+
+  def rates_count
+    [hist_base_currency_rates.size, hist_target_currency_rates.size].min
   end
 end
