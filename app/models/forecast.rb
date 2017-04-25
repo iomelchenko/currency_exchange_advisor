@@ -34,7 +34,7 @@ class Forecast < ApplicationRecord
       ForecastLoader.new(self, forecast_rates).perform
     end
   rescue ActiveRecord::RecordInvalid => exception
-    errors[:base] << exception
+    logger.error exception
   end
 
   def remove_with_rates
@@ -42,5 +42,10 @@ class Forecast < ApplicationRecord
       RateForecast.where(forecast: self).delete_all
       delete
     end
+  end
+
+  def amount=(amount)
+    amount = amount.tr(',', '.') if amount =~ /[\d.,]/
+    self[:amount] = amount
   end
 end

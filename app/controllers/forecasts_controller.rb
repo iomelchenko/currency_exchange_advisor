@@ -23,7 +23,7 @@ class ForecastsController < ApplicationController
   def create
     @forecast = Forecast.new(forecast_params).decorate
 
-    if @forecast.save_forecast
+    if forecast_saved?
       redirect_to edit_forecast_path(@forecast),
                   notice: 'Forecast was successfully created.'
     else
@@ -34,7 +34,7 @@ class ForecastsController < ApplicationController
   def update
     @forecast.assign_attributes(forecast_params)
 
-    if @forecast.save_forecast
+    if forecast_saved?
       redirect_to edit_forecast_path(@forecast),
                   notice: 'Forecast was successfully updated.'
     else
@@ -77,5 +77,9 @@ class ForecastsController < ApplicationController
 
   def aggregate_forecast
     @aggregarted_forecast = ForecastAggregator.new(@forecast).perform.decorate
+  end
+
+  def forecast_saved?
+    @forecast.save_forecast && @forecast.errors.empty?
   end
 end

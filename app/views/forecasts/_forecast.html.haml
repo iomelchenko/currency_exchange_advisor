@@ -1,7 +1,7 @@
 = form_for @forecast, html: { class: "form form-horizontal forecast" } do |f|
   - if @forecast.errors.any?
     #error_explanation
-      %h2
+      %h3
         = pluralize(@forecast.errors.count, "error")
         prohibited this forecast from being saved:
       %ul
