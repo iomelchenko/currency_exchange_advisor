@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validate :validate_username
 
   def validate_username
-    User.where(email: username).exists? || errors.add(:username, :invalid)
+    User.where(email: username).exists? && errors.add(:username, :invalid)
   end
 
   def self.find_for_database_authentication(warden_conditions)
