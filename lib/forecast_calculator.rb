@@ -10,6 +10,8 @@ class ForecastCalculator
       .ts.map(&:to_f).first(forecast_period)
   end
 
+  private
+
   def forecast_period
     @forecast_period ||= @forecast.term_in_weeks * 7
   end

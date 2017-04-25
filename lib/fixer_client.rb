@@ -17,6 +17,8 @@ class FixerClient
     load_currency_rates unless last_rates_loaded?
   end
 
+  private
+
   def fetch_rates
     Fixer::Feed.new(load_type).sort_by { |rate| rate[:date] }.to_a
   end

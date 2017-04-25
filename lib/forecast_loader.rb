@@ -18,6 +18,8 @@ class ForecastLoader
     true
   end
 
+  private
+
   def build_worker(worker, date, rate)
     worker.add(forecast_id: forecast.id,
                date:        date,
