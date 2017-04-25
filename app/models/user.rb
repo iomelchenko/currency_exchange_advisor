@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :forecasts, dependent: :destroy
 
   validate :validate_username
+  validates_uniqueness_of :username
 
   def validate_username
     User.where(email: username).exists? && errors.add(:username, :invalid)
