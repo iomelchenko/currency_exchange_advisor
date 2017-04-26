@@ -7,6 +7,7 @@ gem 'pg'
 gem 'puma'
 gem 'fixer'
 gem 'devise'
+gem 'will_paginate'
 
 gem 'haml-rails'
 gem 'sass-rails'
@@ -14,7 +15,6 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'will_paginate'
 
 gem 'gsl'
 gem 'statsample'
@@ -26,13 +26,21 @@ gem 'draper', '3.0.0.pre1'
 gem 'que'
 gem 'que-web'
 gem 'sinatra', git: 'https://github.com/sinatra/sinatra'
-gem 'foreman'
 
 group :development, :test do
   gem 'pry'
-  gem 'rubocop', require: false
+  gem 'foreman'
+  gem 'database_cleaner'
+  gem 'rspec-rails'
+  gem 'ffaker'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do
   gem 'spring'
+end
+
+group :test do
+  gem 'fuubar'
 end

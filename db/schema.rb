@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20170423195043) do
     t.integer "week_number"
     t.integer "year"
     t.index ["currency_id"], name: "index_historical_currency_rates_on_currency_id", using: :btree
-    t.index ["date"], name: "index_historical_currency_rates_on_date", using: :btree
   end
 
   create_table "que_jobs", primary_key: ["queue", "priority", "run_at", "job_id"], force: :cascade, comment: "3" do |t|

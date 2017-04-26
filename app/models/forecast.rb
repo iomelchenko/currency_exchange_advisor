@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: forecasts
+#
+#  id                 :integer          not null, primary key
+#  base_currency_id   :integer
+#  target_currency_id :integer
+#  term_in_weeks      :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  amount             :decimal(, )
+#  user_id            :integer
+#
+
 class Forecast < ApplicationRecord
   has_many :rate_forecasts
   belongs_to :user
@@ -7,15 +21,15 @@ class Forecast < ApplicationRecord
 
   validates_numericality_of :amount
 
-  scope :with_base_currency, (->() { joins(<<-SQL) })
+  scope :with_base_currency, (-> { joins(<<-SQL) })
     JOIN currencies AS base_curr ON base_curr.id = base_currency_id
     SQL
 
-  scope :with_target_currency, (->() { joins(<<-SQL) })
+  scope :with_target_currency, (-> { joins(<<-SQL) })
     JOIN currencies AS target_curr ON target_curr.id = target_currency_id
     SQL
 
-  scope :select_attributes, (->() { select(<<-SQL) })
+  scope :select_attributes, (-> { select(<<-SQL) })
     forecasts.id,
     base_curr.name AS base_curr_name,
     target_curr.name AS target_curr_name,

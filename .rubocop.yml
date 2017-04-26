@@ -13,3 +13,5 @@ AllCops:
     - config/environments/test.rb
     - config/initializers/devise.rb
     - Gemfile
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']

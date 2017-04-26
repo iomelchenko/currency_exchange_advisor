@@ -11,8 +11,8 @@
       - @aggregarted_forecast.each do |forecast|
         %tr
           %td= forecast.year_with_week
-          %td= forecast.avg_rate.round(3)
+          %td= forecast.max_rate.round(3)
           %td= forecast.target_amount(@forecast.amount)
-          %td= forecast.profit_loss(@aggregarted_forecast.first.avg_rate, @forecast.amount)
+          %td= forecast.profit_loss(@aggregarted_forecast.first.max_rate, @forecast.amount)
           %td= forecast.max_ranks
 

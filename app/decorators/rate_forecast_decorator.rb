@@ -10,11 +10,11 @@ class RateForecastDecorator < ApplicationDecorator
   end
 
   def target_amount(amount)
-    (amount * object.avg_rate).round(2)
+    (amount * object.max_rate).round(2)
   end
 
   def profit_loss(first_rate, amount)
-    profit_loss = ((object.avg_rate - first_rate) * amount).round(2)
+    profit_loss = ((object.max_rate - first_rate) * amount).round(2)
     profit_loss if profit_loss != 0
   end
 end
