@@ -44,7 +44,7 @@ class ForecastsController < ApplicationController
   end
 
   def fetch_chart_data
-    forecast_rates = RateForecast.build_forecasts_object(@forecast)
+    forecast_rates = RateForecast.build_chart_object(@forecast)
     render json: forecast_rates
   end
 

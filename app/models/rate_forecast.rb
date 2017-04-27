@@ -27,7 +27,7 @@ class RateForecast < ApplicationRecord
   scope :order_by_year_week, (-> { order('year, week_number') })
 
   class << self
-    def build_forecasts_object(forecast)
+    def build_chart_object(forecast)
       forecast_rates = where(forecast_id: forecast.id).order(:date)
       rates = fetch_rates(forecast_rates, forecast)
 

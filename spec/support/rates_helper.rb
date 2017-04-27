@@ -33,4 +33,9 @@ module RatesHelper
 
     rates
   end
+
+  def load_forecast_rates(forecast, forecast_rates)
+    ForecastLoader.new(forecast, forecast_rates).perform
+    RateForecast.all
+  end
 end
