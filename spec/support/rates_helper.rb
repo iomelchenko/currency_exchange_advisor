@@ -38,4 +38,18 @@ module RatesHelper
     ForecastLoader.new(forecast, forecast_rates).perform
     RateForecast.all
   end
+
+  def find_week_with_rank(rank, loaded_rates)
+    sorted_rates = loaded_rates.group(:week_number)
+                               .select('MAX(rate) as rate, week_number')
+                               .order('MAX(rate)').map(&:week_number)
+                               .uniq.reverse
+
+    sorted_rates[rank - 1]
+  end
+
+  def sort_aggregated_data(aggregated_data)
+    aggregated_data.order(:year, :week_number)
+                   .map { |rate| { rate.week_number.to_s => rate.year } }
+  end
 end
